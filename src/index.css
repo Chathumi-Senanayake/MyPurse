@@ -1,0 +1,32 @@
+
+@import "tailwindcss";
+
+:root {
+  font-family: Inter, system-ui, sans-serif;
+  color: #24352b;
+  background: #f5f8f1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* Soft SAVE jar background for every page */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("/save-background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: -1;
+}
