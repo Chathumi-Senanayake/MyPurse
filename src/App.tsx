@@ -13,6 +13,22 @@ import Login from "./pages/Login";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("Dashboard");
+  const [user, setUser] = useState<User | null>(null);
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
+  useEffect(() => {
+    if (!auth) {
+      setCheckingAuth(false);
+      return;
+    }
+
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setCheckingAuth(false);
+    });
+
+    return unsubscribe;
+  }, []);
 
   if (!firebaseConfigured || !auth) {
     return (
@@ -26,17 +42,6 @@ function App() {
       </main>
     );
   }
-  const [user, setUser] = useState<User | null>(null);
-  const [checkingAuth, setCheckingAuth] = useState(true);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setCheckingAuth(false);
-    });
-
-    return unsubscribe;
-  }, []);
 
   function renderPage() {
     switch (currentPage) {
