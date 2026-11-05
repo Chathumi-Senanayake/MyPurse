@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut, type User } from "firebase/auth";
 import { LogOut } from "lucide-react";
-import { auth } from "./lib/firebase";
+import { auth, firebaseConfigured } from "./lib/firebase";
 
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
@@ -13,6 +13,19 @@ import Login from "./pages/Login";
 
 function App() {
   const [currentPage, setCurrentPage] = useState("Dashboard");
+
+  if (!firebaseConfigured || !auth) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#F3F6F0] p-6">
+        <section className="w-full max-w-lg rounded-3xl bg-white p-8 text-center shadow-xl">
+          <h1 className="text-3xl font-bold text-[#254735]">MyPurse needs setup</h1>
+          <p className="mt-4 leading-7 text-[#526757]">
+            Add the Firebase environment variables to this Vercel project, then redeploy to enable sign-in and your dashboard.
+          </p>
+        </section>
+      </main>
+    );
+  }
   const [user, setUser] = useState<User | null>(null);
   const [checkingAuth, setCheckingAuth] = useState(true);
 

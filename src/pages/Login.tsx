@@ -25,7 +25,7 @@ function Login() {
     try {
       if (isRegistering) {
         const result = await createUserWithEmailAndPassword(
-          auth,
+          auth!,
           email.trim(),
           password
         );
@@ -34,7 +34,7 @@ function Login() {
           displayName: name.trim(),
         });
       } else {
-        await signInWithEmailAndPassword(auth, email.trim(), password);
+        await signInWithEmailAndPassword(auth!, email.trim(), password);
       }
     } catch (err) {
       const code = (err as { code?: string }).code;
@@ -59,7 +59,7 @@ function Login() {
     setLoading(true);
 
     try {
-      await signInWithPopup(auth, googleProvider);
+      await signInWithPopup(auth!, googleProvider!);
     } catch (err) {
       const code = (err as { code?: string }).code;
 
