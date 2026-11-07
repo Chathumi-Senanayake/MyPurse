@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import {
   Wallet,
@@ -252,21 +251,22 @@ function Dashboard() {
       : String(value);
 
   return (
-    <main className="min-h-screen rounded-[30px] bg-[#F5F7F2]/65 p-5 md:p-7">
+    <main className="min-h-screen min-w-0 w-full rounded-2xl bg-[#F5F7F2]/65 p-4 sm:rounded-[30px] sm:p-5 md:p-7">
+
       {/* Personalized greeting */}
-      <header>
-        <p className="text-sm font-medium text-[#718074]">
+      <header className="min-w-0">
+        <p className="text-xs font-medium text-[#718074] sm:text-sm">
           {now.toLocaleString("en", {
             month: "long",
             year: "numeric",
           })}
         </p>
 
-        <h1 className="mt-2 text-3xl font-bold text-[#263D30] md:text-4xl">
+        <h1 className="mt-2 text-2xl font-bold leading-tight text-[#263D30] sm:text-3xl md:text-4xl">
           {greeting}, {userName}! 🌿
         </h1>
 
-        <p className="mt-2 text-sm text-[#718074]">
+        <p className="mt-2 text-xs leading-5 text-[#718074] sm:text-sm">
           Here's your financial overview for today.
         </p>
       </header>
@@ -275,7 +275,7 @@ function Dashboard() {
       {error && (
         <div
           role="alert"
-          className="mt-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700"
+          className="mt-5 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700 sm:p-4"
         >
           {error}
         </div>
@@ -291,26 +291,26 @@ function Dashboard() {
       ) : (
         <>
           {/* Summary cards */}
-          <section className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <section className="mt-5 grid min-w-0 grid-cols-1 gap-3 sm:mt-6 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
             {cards.map((card) => {
               const Icon = card.icon;
 
               return (
                 <article
                   key={card.title}
-                  className="rounded-2xl border border-[#E4EAE0] bg-white p-5 shadow-sm transition-all duration-300 ease-out hover:scale-[1.03] hover:shadow-lg"
+                  className="min-w-0 rounded-2xl border border-[#E4EAE0] bg-white p-4 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-5"
                 >
-                  <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-medium text-[#718074]">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="text-xs font-medium text-[#718074] sm:text-sm">
                       {card.title}
                     </p>
 
-                    <div className={`rounded-xl p-3 ${card.color}`}>
-                      <Icon size={20} />
+                    <div className={`shrink-0 rounded-xl p-2.5 sm:p-3 ${card.color}`}>
+                      <Icon size={19} />
                     </div>
                   </div>
 
-                  <p className="mt-4 break-words text-2xl font-bold text-[#263D30]">
+                  <p className="mt-3 break-words text-xl font-bold text-[#263D30] sm:mt-4 sm:text-2xl">
                     {formatMoney(card.amount)}
                   </p>
 
@@ -322,28 +322,29 @@ function Dashboard() {
             })}
           </section>
 
-          {/* Existing charts */}
-          <section className="mt-6 grid grid-cols-1 gap-4 xl:grid-cols-2">
+          {/* Charts */}
+          <section className="mt-5 grid min-w-0 grid-cols-1 gap-4 xl:mt-6 xl:grid-cols-2">
+
             {/* Spending by Category */}
-            <article className="min-w-0 rounded-2xl border border-[#E4EAE0] bg-white p-5 shadow-sm transition-all duration-300 ease-out hover:shadow-lg">
+            <article className="min-w-0 rounded-2xl border border-[#E4EAE0] bg-white p-4 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-5">
               <div className="flex flex-wrap items-start justify-between gap-2">
-                <div>
-                  <h2 className="text-lg font-bold text-[#263D30]">
+                <div className="min-w-0">
+                  <h2 className="text-base font-bold text-[#263D30] sm:text-lg">
                     Spending by Category
                   </h2>
-                  <p className="mt-1 text-sm text-[#879388]">
+                  <p className="mt-1 text-xs text-[#879388] sm:text-sm">
                     How you spent money this month
                   </p>
                 </div>
 
-                <span className="rounded-lg border border-[#E4EAE0] px-3 py-2 text-xs text-[#718074]">
+                <span className="shrink-0 rounded-lg border border-[#E4EAE0] px-2.5 py-1.5 text-[11px] text-[#718074] sm:px-3 sm:py-2 sm:text-xs">
                   This Month
                 </span>
               </div>
 
               {hasMonthlyExpenses ? (
-                <div className="mt-3 grid grid-cols-1 items-center gap-2 sm:grid-cols-2">
-                  <div className="relative mx-auto h-[200px] w-full max-w-[240px]">
+                <div className="mt-3 grid min-w-0 grid-cols-1 items-center gap-3 sm:grid-cols-2 sm:gap-2">
+                  <div className="relative mx-auto h-[185px] w-full max-w-[240px] sm:h-[200px]">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
                         <Pie
@@ -352,8 +353,8 @@ function Dashboard() {
                           nameKey="name"
                           cx="50%"
                           cy="50%"
-                          innerRadius={52}
-                          outerRadius={76}
+                          innerRadius={48}
+                          outerRadius={72}
                           paddingAngle={3}
                           stroke="none"
                         >
@@ -377,7 +378,7 @@ function Dashboard() {
 
                     <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
                       <span className="text-xs text-[#718074]">LKR</span>
-                      <span className="mt-1 text-xl font-bold text-[#263D30]">
+                      <span className="mt-1 text-lg font-bold text-[#263D30] sm:text-xl">
                         {new Intl.NumberFormat("en-LK", {
                           maximumFractionDigits: 0,
                         }).format(monthlyExpenses)}
@@ -388,7 +389,7 @@ function Dashboard() {
                     </div>
                   </div>
 
-                  <div className="space-y-3">
+                  <div className="min-w-0 space-y-3">
                     {categoryData.map((item, index) => (
                       <div key={item.name}>
                         <div className="flex items-center justify-between gap-2 text-xs">
@@ -420,12 +421,12 @@ function Dashboard() {
                   </div>
                 </div>
               ) : (
-                <div className="flex h-[220px] flex-col items-center justify-center text-center">
+                <div className="flex h-[200px] flex-col items-center justify-center text-center sm:h-[220px]">
                   <Receipt size={30} className="text-[#A0AEA0]" />
                   <p className="mt-3 font-medium text-[#263D30]">
                     No spending data yet
                   </p>
-                  <p className="mt-1 text-sm text-[#879388]">
+                  <p className="mt-1 text-xs text-[#879388] sm:text-sm">
                     Add expenses to see your category breakdown.
                   </p>
                 </div>
@@ -433,29 +434,29 @@ function Dashboard() {
             </article>
 
             {/* Monthly Income vs Expenses */}
-            <article className="min-w-0 rounded-2xl border border-[#E4EAE0] bg-white p-5 shadow-sm transition-all duration-300 ease-out hover:shadow-lg">
+            <article className="min-w-0 rounded-2xl border border-[#E4EAE0] bg-white p-4 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-5">
               <div className="flex flex-wrap items-start justify-between gap-2">
-                <div>
-                  <h2 className="text-lg font-bold text-[#263D30]">
+                <div className="min-w-0">
+                  <h2 className="text-base font-bold text-[#263D30] sm:text-lg">
                     Monthly Income vs Expenses
                   </h2>
-                  <p className="mt-1 text-sm text-[#879388]">
+                  <p className="mt-1 text-xs text-[#879388] sm:text-sm">
                     Compare your finances over six months
                   </p>
                 </div>
 
-                <span className="rounded-lg border border-[#E4EAE0] px-3 py-2 text-xs text-[#718074]">
+                <span className="shrink-0 rounded-lg border border-[#E4EAE0] px-2.5 py-1.5 text-[11px] text-[#718074] sm:px-3 sm:py-2 sm:text-xs">
                   Last 6 Months
                 </span>
               </div>
 
               {hasSixMonthData ? (
-                <div className="mt-3 h-[220px] w-full">
+                <div className="mt-3 h-[230px] w-full min-w-0 sm:h-[260px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart
                       data={monthlyData}
-                      margin={{ top: 8, right: 4, left: -15, bottom: 0 }}
-                      barGap={5}
+                      margin={{ top: 8, right: 4, left: -20, bottom: 0 }}
+                      barGap={4}
                     >
                       <CartesianGrid
                         stroke="#EDF1E9"
@@ -465,7 +466,7 @@ function Dashboard() {
 
                       <XAxis
                         dataKey="month"
-                        tick={{ fill: "#718074", fontSize: 12 }}
+                        tick={{ fill: "#718074", fontSize: 11 }}
                         axisLine={false}
                         tickLine={false}
                       />
@@ -475,6 +476,7 @@ function Dashboard() {
                         axisLine={false}
                         tickLine={false}
                         tickFormatter={axisFormatter}
+                        width={42}
                       />
 
                       <Tooltip
@@ -488,7 +490,7 @@ function Dashboard() {
 
                       <Legend
                         wrapperStyle={{
-                          fontSize: "12px",
+                          fontSize: "11px",
                           paddingTop: "8px",
                         }}
                       />
@@ -515,7 +517,7 @@ function Dashboard() {
                   <p className="mt-3 font-medium text-[#263D30]">
                     No monthly data yet
                   </p>
-                  <p className="mt-1 text-sm text-[#879388]">
+                  <p className="mt-1 text-xs text-[#879388] sm:text-sm">
                     Record income or expenses to see your chart.
                   </p>
                 </div>
@@ -523,20 +525,20 @@ function Dashboard() {
             </article>
           </section>
 
-          {/* NEW: Full-width Daily Income vs Expenses */}
-          <section className="mt-6 w-full">
-            <article className="w-full rounded-2xl border border-[#E4EAE0] bg-white p-5 shadow-sm transition-all duration-300 ease-out hover:shadow-lg md:p-6">
+          {/* Daily Income vs Expenses */}
+          <section className="mt-5 w-full min-w-0 sm:mt-6">
+            <article className="w-full min-w-0 rounded-2xl border border-[#E4EAE0] bg-white p-4 shadow-sm transition-shadow duration-300 hover:shadow-lg sm:p-5 md:p-6">
               <div className="flex flex-wrap items-start justify-between gap-2">
-                <div>
-                  <h2 className="text-lg font-bold text-[#263D30]">
+                <div className="min-w-0">
+                  <h2 className="text-base font-bold text-[#263D30] sm:text-lg">
                     Daily Income vs Expenses
                   </h2>
-                  <p className="mt-1 text-sm text-[#879388]">
+                  <p className="mt-1 text-xs text-[#879388] sm:text-sm">
                     Track your money day by day this month
                   </p>
                 </div>
 
-                <span className="rounded-lg border border-[#E4EAE0] px-3 py-2 text-xs text-[#718074]">
+                <span className="shrink-0 rounded-lg border border-[#E4EAE0] px-2.5 py-1.5 text-[11px] text-[#718074] sm:px-3 sm:py-2 sm:text-xs">
                   {now.toLocaleString("en", {
                     month: "long",
                     year: "numeric",
@@ -545,12 +547,17 @@ function Dashboard() {
               </div>
 
               {hasDailyData ? (
-                <div className="mt-5 h-[320px] w-full md:h-[360px]">
+                <div className="mt-4 h-[270px] w-full min-w-0 sm:mt-5 sm:h-[320px] md:h-[360px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart
                       data={dailyData}
-                      margin={{ top: 8, right: 12, left: 4, bottom: 8 }}
-                      barGap={2}
+                      margin={{
+                        top: 8,
+                        right: 4,
+                        left: -12,
+                        bottom: 8,
+                      }}
+                      barGap={1}
                     >
                       <CartesianGrid
                         stroke="#EDF1E9"
@@ -561,7 +568,7 @@ function Dashboard() {
                       <XAxis
                         dataKey="day"
                         interval={daysInMonth > 20 ? 2 : 0}
-                        tick={{ fill: "#718074", fontSize: 11 }}
+                        tick={{ fill: "#718074", fontSize: 10 }}
                         axisLine={false}
                         tickLine={false}
                         label={{
@@ -569,16 +576,16 @@ function Dashboard() {
                           position: "insideBottom",
                           offset: -2,
                           fill: "#879388",
-                          fontSize: 12,
+                          fontSize: 11,
                         }}
                       />
 
                       <YAxis
-                        tick={{ fill: "#879388", fontSize: 11 }}
+                        tick={{ fill: "#879388", fontSize: 10 }}
                         axisLine={false}
                         tickLine={false}
                         tickFormatter={axisFormatter}
-                        width={48}
+                        width={43}
                       />
 
                       <Tooltip
@@ -593,34 +600,34 @@ function Dashboard() {
 
                       <Legend
                         wrapperStyle={{
-                          fontSize: "12px",
-                          paddingTop: "12px",
+                          fontSize: "11px",
+                          paddingTop: "10px",
                         }}
                       />
 
                       <Bar
                         dataKey="Income"
                         fill="#62A77B"
-                        radius={[4, 4, 0, 0]}
+                        radius={[3, 3, 0, 0]}
                         maxBarSize={18}
                       />
 
                       <Bar
                         dataKey="Expenses"
                         fill="#E98282"
-                        radius={[4, 4, 0, 0]}
+                        radius={[3, 3, 0, 0]}
                         maxBarSize={18}
                       />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
               ) : (
-                <div className="flex h-[280px] flex-col items-center justify-center text-center">
+                <div className="flex h-[250px] flex-col items-center justify-center text-center">
                   <TrendingUp size={30} className="text-[#A0AEA0]" />
                   <p className="mt-3 font-medium text-[#263D30]">
                     No daily data yet
                   </p>
-                  <p className="mt-1 text-sm text-[#879388]">
+                  <p className="mt-1 px-2 text-xs text-[#879388] sm:text-sm">
                     Record income or expenses this month to see your daily chart.
                   </p>
                 </div>
@@ -629,7 +636,7 @@ function Dashboard() {
           </section>
 
           {/* Footer */}
-          <p className="mt-4 px-1 text-xs leading-5 text-[#879388]">
+          <p className="mt-4 px-1 text-[11px] leading-5 text-[#879388] sm:text-xs">
             Figures are calculated from transactions recorded in MyPurse.
             Your actual bank balance may be different.
           </p>
